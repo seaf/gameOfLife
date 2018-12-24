@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameOfLife.Engine;
+using System;
 using System.Collections.Generic;
 
 namespace GameOfLife
@@ -7,14 +8,17 @@ namespace GameOfLife
     {
         private const string INPUT_DONE = "done";
 
+        private static readonly IGenerationEngine generationEngine = new GenerationEngine();
+
         static void Main(string[] args)
         {
             // TODO: Consider reading from a file for easier editing of large input and providing set complex input
-            var inputCoords = new HashSet<Tuple<ulong, ulong>>();
+            var liveCells = new HashSet<Tuple<ulong, ulong>>();
             while (true)
             {
-                Console.WriteLine("Enter coordinates (as 64-bit integers) of a living cell, separated by a comma (e.g. x,y). Enter \"done\" to finish:");
-                var line = Console.ReadLine().Trim().ToLowerInvariant();
+                Console.WriteLine("Enter coordinates (as unsigned 64-bit integers) of a living cell, separated by a comma (e.g. x,y). Enter \"done\" to finish:");
+
+                var line = ReadProcessedLine();
                 if (line == INPUT_DONE)
                 {
                     break;
@@ -33,18 +37,37 @@ namespace GameOfLife
                     continue;
                 }
 
-                inputCoords.Add(Tuple.Create(x, y));
+                liveCells.Add(Tuple.Create(x, y));
             }
 
-            // For now, just echo input.
-            Console.WriteLine("Provided input:");
-            foreach (var pair in inputCoords)
+            if (liveCells.Count == 0)
             {
-                Console.WriteLine(pair);
+                Environment.Exit(0);
             }
 
-            Console.WriteLine("Hit ENTER to exit.");
-            Console.ReadLine();
+            var generation = 1;
+            while (true)
+            {
+                Console.WriteLine($"Generation: {generation++}");
+                foreach (var cell in liveCells)
+                {
+                    Console.WriteLine(cell);
+                }
+
+                Console.WriteLine("Hit ENTER to advance the generation, or \"done\" to quit.");
+                var line = ReadProcessedLine();
+                if (line == INPUT_DONE)
+                {
+                    return;
+                }
+
+                liveCells = generationEngine.Advance(liveCells);
+            }
+        }
+
+        private static string ReadProcessedLine()
+        {
+            return Console.ReadLine().Trim().ToLowerInvariant();
         }
     }
 }
