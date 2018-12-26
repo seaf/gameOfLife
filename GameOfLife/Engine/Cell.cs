@@ -6,14 +6,13 @@ namespace GameOfLife.Engine
     /// <summary>
     /// Representation of the game's cells, or grid coordinates.
     /// </summary>
-    /// <remarks>The internal Tuple{ulong,ulong} is used to access a trustworthy implementation of
-    /// the GetHashCode method while allow the class to hide the Item1/Item2 properties and expose its own
-    /// properties with clearer meaning. Equality methods are overriden for completeness and consistency since
-    /// this type may be used in HashSets and/or Dictionaries.</remarks>
-    public class Cell : IEquatable<Cell>
+    /// <remarks>This is essentially a named <see cref="Tuple"/> that contains some additional game-specific logic.
+    /// By extending <see cref="Tuple<ulong, ulong"/> the class can leverage relevent and trustworthy implementations of all
+    /// equality methods, and the GetHashCode method. Surface area for testing is reduced by not overriding these
+    /// or implementing them separately and the <see cref="Cell"/> type can house game-speific logic and provide clearer
+    /// meaning of the coordinates throughout the game code.</remarks>
+    public class Cell : Tuple<ulong, ulong>
     {
-        private readonly Tuple<ulong, ulong> internalTuple;
-
         private readonly bool isMinRow;
         private readonly bool isMinCol;
         private readonly bool isMaxRow;
@@ -25,9 +24,8 @@ namespace GameOfLife.Engine
         private readonly ulong increasedColumnCoordinate;
 
         public Cell(ulong rowCoordinate, ulong columnCoordinate)
+            : base(rowCoordinate, columnCoordinate)
         {
-            this.internalTuple = Tuple.Create(rowCoordinate, columnCoordinate);
-
             // These could be properties that evaluate these expressions on each call
             // if using extra memory to store these values becomes a concern.
             this.isMinRow = rowCoordinate == ulong.MinValue;
@@ -44,67 +42,12 @@ namespace GameOfLife.Engine
         /// <summary>
         /// The row location of this cell in the game's 2D grid.
         /// </summary>
-        public ulong RowCoordinate => this.internalTuple.Item1;
+        public ulong RowCoordinate => this.Item1;
 
         /// <summary>
         /// The column location of this cell in the game's 2D grid.
         /// </summary>
-        public ulong ColumnCoordinate => this.internalTuple.Item2;
-
-        /// <summary>
-        /// Implementation of Equals.
-        /// </summary>
-        /// <param name="obj">The object to compare to.</param>
-        /// <returns>Whether or not this object is equal to the given one.</returns>
-        public override bool Equals(object obj)
-        {
-            return this.internalTuple.Equals(obj);
-        }
-
-        public bool Equals(Cell other)
-        {
-            return this.internalTuple.Equals(other.internalTuple);
-        }
-
-        /// <summary>
-        /// Implementation of GetHashCode.
-        /// </summary>
-        /// <returns>The computed hash code.</returns>
-        public override int GetHashCode()
-        {
-            return this.internalTuple.GetHashCode();
-        }
-
-        /// <summary>
-        /// Implementation of ToString.
-        /// </summary>
-        /// <returns>The string representation of this <see cref="Cell"/>.</returns>
-        public override string ToString()
-        {
-            return this.internalTuple.ToString();
-        }
-
-        /// <summary>
-        /// Implementation of the == operator.
-        /// </summary>
-        /// <param name="operand1">The first object to compare.</param>
-        /// <param name="operand2>The second object to compare.</param>
-        /// <returns>Whether or not the two values are equivalent.</returns>
-        public static bool operator ==(Cell operand1, Cell operand2)
-        {
-            return operand1.Equals(operand2);
-        }
-
-        /// <summary>
-        /// Implementation of the != operator.
-        /// </summary>
-        /// <param name="operand1">The first object to compare.</param>
-        /// <param name="operand2">The second object to compare.</param>
-        /// <returns>Whether or not the two values inequivalent.</returns>
-        public static bool operator !=(Cell operand1, Cell operand2)
-        {
-            return !operand1.Equals(operand2);
-        }
+        public ulong ColumnCoordinate => this.Item2;
 
         /// <summary>
         /// An iterator over the collection of this cell's neighbors that exist within the game's grid.
