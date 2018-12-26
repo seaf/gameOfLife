@@ -6,9 +6,10 @@ namespace GameOfLife.Engine
     /// <summary>
     /// Representation of the game's cells, or grid coordinates.
     /// </summary>
-    /// <remarks>The internal Tuple{ulong,ulong} is used to access trustworthy implementations of
-    /// the Equals and GetHashCode methods while the class itself provides a type that can hold some
-    /// game-specific logic and whose meaning within the context of the game is clear.</remarks>
+    /// <remarks>The internal Tuple{ulong,ulong} is used to access a trustworthy implementation of
+    /// the GetHashCode method while allow the class to hide the Item1/Item2 properties and expose its own
+    /// properties with clearer meaning. Equality methods are overriden for completeness and consistency since
+    /// this type may be used in HashSets and/or Dictionaries.</remarks>
     public class Cell : IEquatable<Cell>
     {
         private readonly Tuple<ulong, ulong> internalTuple;
@@ -81,6 +82,28 @@ namespace GameOfLife.Engine
         public override string ToString()
         {
             return this.internalTuple.ToString();
+        }
+
+        /// <summary>
+        /// Implementation of the == operator.
+        /// </summary>
+        /// <param name="operand1">The first object to compare.</param>
+        /// <param name="operand2>The second object to compare.</param>
+        /// <returns>Whether or not the two values are equivalent.</returns>
+        public static bool operator ==(Cell operand1, Cell operand2)
+        {
+            return operand1.Equals(operand2);
+        }
+
+        /// <summary>
+        /// Implementation of the != operator.
+        /// </summary>
+        /// <param name="operand1">The first object to compare.</param>
+        /// <param name="operand2">The second object to compare.</param>
+        /// <returns>Whether or not the two values inequivalent.</returns>
+        public static bool operator !=(Cell operand1, Cell operand2)
+        {
+            return !operand1.Equals(operand2);
         }
 
         /// <summary>
