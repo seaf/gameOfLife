@@ -1,4 +1,4 @@
-﻿using GameOfLife.Engine;
+﻿using GameOfLife.Engine.Strategy;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +8,7 @@ namespace GameOfLife
     {
         private const string INPUT_DONE = "done";
 
-        private static readonly IGenerationEngine generationEngine = new GenerationEngine();
+        private static readonly IGenerationStrategy generationStrategy = new StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy();
 
         static void Main(string[] args)
         {
@@ -61,7 +61,7 @@ namespace GameOfLife
                     return;
                 }
 
-                liveCells = generationEngine.Advance(liveCells);
+                liveCells = generationStrategy.AdvanceGeneration(liveCells);
             }
         }
 
