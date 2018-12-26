@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GameOfLife.Engine.Strategy
 {
@@ -13,6 +12,6 @@ namespace GameOfLife.Engine.Strategy
         /// </summary>
         /// <param name="liveCells">The set of currently living cells.</param>
         /// <returns>The set of living cells in the next generation.</returns>
-        HashSet<Tuple<ulong, ulong>> AdvanceGeneration(HashSet<Tuple<ulong, ulong>> liveCells);
+        HashSet<Cell> AdvanceGeneration(HashSet<Cell> liveCells);
     }
 }

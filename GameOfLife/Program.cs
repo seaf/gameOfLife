@@ -1,10 +1,11 @@
-﻿using GameOfLife.Engine.Strategy;
+﻿using GameOfLife.Engine;
+using GameOfLife.Engine.Strategy;
 using System;
 using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    class Program
+    public class Program
     {
         private const string INPUT_DONE = "done";
 
@@ -13,7 +14,7 @@ namespace GameOfLife
         static void Main(string[] args)
         {
             // TODO: Consider reading from a file for easier editing of large input and providing set complex input
-            var liveCells = new HashSet<Tuple<ulong, ulong>>();
+            var liveCells = new HashSet<Cell>();
             while (true)
             {
                 Console.WriteLine("Enter coordinates (as unsigned 64-bit integers) of a living cell, separated by a comma (e.g. x,y). Enter \"done\" to finish:");
@@ -37,7 +38,7 @@ namespace GameOfLife
                     continue;
                 }
 
-                liveCells.Add(Tuple.Create(x, y));
+                liveCells.Add(new Cell(x, y));
             }
 
             if (liveCells.Count == 0)
