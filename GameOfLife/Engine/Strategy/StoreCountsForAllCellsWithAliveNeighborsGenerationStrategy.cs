@@ -17,10 +17,30 @@ namespace GameOfLife.Engine.Strategy
     /// </summary>
     internal class StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy : IGenerationStrategy
     {
-        // TODO: These should live behind separate interface governing logic to compute next gen.
-        private const int RebirthThreshold = 3;
-        private const int StayAliveThreshold = 2;
+        private readonly IGameRules gameRules;
 
+        /// <summary>
+        /// Construct the strategy with <see cref="StandardGameRules"/>.
+        /// </summary>
+        public StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy()
+            : this(StandardGameRules.Instance)
+        {
+        }
+
+        /// <summary>
+        /// Construct the strategy with the provided <see cref="IGameRules" />.
+        /// </summary>
+        /// <param name="gameRules">The <see cref="IGameRules"/> to use.</param>
+        public StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy(IGameRules gameRules)
+        {
+            this.gameRules = gameRules ?? throw new ArgumentNullException(nameof(gameRules));
+        }
+
+        /// <summary>
+        /// Computes the next generation of the game's state.
+        /// </summary>
+        /// <param name="liveCells">The set of currently living cells.</param>
+        /// <returns>The set of living cells in the next generation.</returns>
         public HashSet<Tuple<ulong, ulong>> AdvanceGeneration(HashSet<Tuple<ulong, ulong>> liveCells)
         {
             var newGeneration = new HashSet<Tuple<ulong, ulong>>();
@@ -42,8 +62,9 @@ namespace GameOfLife.Engine.Strategy
 
             foreach (var candidateCellAndAliveNeighborCount in cellsWithNonZeroLivingNeighbors)
             {
-                if (candidateCellAndAliveNeighborCount.Value == RebirthThreshold ||
-                    (candidateCellAndAliveNeighborCount.Value == StayAliveThreshold && liveCells.Contains(candidateCellAndAliveNeighborCount.Key)))
+                if (this.gameRules.ShouldCellLive(
+                    liveCells.Contains(candidateCellAndAliveNeighborCount.Key),
+                    candidateCellAndAliveNeighborCount.Value))
                 {
                     newGeneration.Add(candidateCellAndAliveNeighborCount.Key);
                 }
