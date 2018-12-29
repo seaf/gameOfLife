@@ -9,7 +9,7 @@ namespace GameOfLife
     {
         private const string INPUT_DONE = "done";
 
-        private static readonly IGenerationStrategy generationStrategy = new StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy();
+        private static readonly IGenerationStrategy generationStrategy = new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
 
         static void Main(string[] args)
         {

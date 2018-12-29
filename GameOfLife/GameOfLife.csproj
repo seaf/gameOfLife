@@ -47,6 +47,7 @@
     <Compile Include="Engine\IGameRules.cs" />
     <Compile Include="Engine\StandardGameRules.cs" />
     <Compile Include="Engine\Strategy\IGenerationStrategy.cs" />
+    <Compile Include="Engine\Strategy\ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

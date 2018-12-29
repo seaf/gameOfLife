@@ -15,3 +15,4 @@ namespace GameOfLife.Engine.Strategy
         HashSet<Cell> AdvanceGeneration(HashSet<Cell> liveCells);
     }
 }
+ 
