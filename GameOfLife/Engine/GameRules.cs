@@ -44,7 +44,7 @@ namespace GameOfLife.Engine
                 return this.survivalThresholds.Contains(aliveNeighborCount);
             }
 
-            return this.birthThresholds.Any(x => x == aliveNeighborCount);
+            return this.birthThresholds.Contains(aliveNeighborCount);
         }
     }
 }
