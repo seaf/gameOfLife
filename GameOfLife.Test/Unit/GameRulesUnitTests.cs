@@ -1,7 +1,7 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using GameOfLife.Engine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace GameOfLife.Test.Unit
 {

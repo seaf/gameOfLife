@@ -1,7 +1,7 @@
-﻿using GameOfLife.Engine;
-using GameOfLife.Engine.Strategy;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using GameOfLife.Engine;
+using GameOfLife.Engine.Strategy;
 
 namespace GameOfLife
 {
