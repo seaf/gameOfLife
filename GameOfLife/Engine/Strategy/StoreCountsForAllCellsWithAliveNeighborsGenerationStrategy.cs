@@ -20,10 +20,10 @@ namespace GameOfLife.Engine.Strategy
         private readonly IGameRules gameRules;
 
         /// <summary>
-        /// Construct the strategy with <see cref="StandardGameRules"/>.
+        /// Construct the strategy with <see cref="GameRules"/>.
         /// </summary>
         public StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy()
-            : this(StandardGameRules.Instance)
+            : this(GameRules.StandardRulesInstance)
         {
         }
 

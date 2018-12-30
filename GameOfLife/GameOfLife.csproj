@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Engine\Cell.cs" />
     <Compile Include="Engine\IGameRules.cs" />
-    <Compile Include="Engine\StandardGameRules.cs" />
+    <Compile Include="Engine\GameRules.cs" />
     <Compile Include="Engine\Strategy\IGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
