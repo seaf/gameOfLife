@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameOfLife.Test.Unit
 {
-    // Tests have again been separated into many cases here to have descriptive names of each scenario under test.
     [TestClass]
     public class CellUnitTests
     {

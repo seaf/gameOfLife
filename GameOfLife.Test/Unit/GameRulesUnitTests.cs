@@ -5,8 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameOfLife.Test.Unit
 {
-    // These tests could be combined using [DataRow} or similar data injection methods.
-    // They have been kept separate to have descriptive names for each test case.
     [TestClass]
     public class GameRulesUnitTests
     {

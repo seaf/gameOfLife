@@ -46,6 +46,8 @@ namespace GameOfLife.Engine.Strategy
                 {
                     if (nextGeneration.Contains(neighbor))
                     {
+                        // Previously determined this cell is alive next generation.
+                        // No need to do so again.
                         continue;
                     }
 
