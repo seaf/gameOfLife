@@ -9,6 +9,83 @@ namespace GameOfLife.Test.Unit
     [TestClass]
     public class StandardRulesGenerationStrategyTests
     {
+        private readonly Cell testCell;
+
+        public StandardRulesGenerationStrategyTests()
+        {
+            testCell = new Cell(10, 10);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationLiveCellWithOneLiveNeighborShouldNotSurvive(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: true, liveNeighborCount: 1));
+
+            nextGen.Should().NotContain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationLiveCellWithTwoLiveNeighborsShouldSurvive(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: true, liveNeighborCount: 2));
+
+            nextGen.Should().Contain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationLiveCellWithThreeLiveNeighborsShouldSurvive(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: true, liveNeighborCount: 3));
+
+            nextGen.Should().Contain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationLiveCellWithFourLiveNeighborsShouldNotSurvive(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: true, liveNeighborCount: 4));
+
+            nextGen.Should().NotContain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationDeadCellWithTwoLiveNeighborsShouldRemainDead(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: false, liveNeighborCount: 2));
+
+            nextGen.Should().NotContain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationDeadCellWithThreeLiveNeighborsShouldBecomeAlive(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: false, liveNeighborCount: 3));
+
+            nextGen.Should().Contain(this.testCell);
+        }
+
+        [DynamicData(nameof(StrategiesWithStandardRules))]
+        [DataTestMethod, TestCategory(TestCategories.Unit)]
+        public void AdvanceGenerationDeadCellWithFourLiveNeighborsShouldRemainDead(IGenerationStrategy strategyUnderTest)
+        {
+            var nextGen = strategyUnderTest.AdvanceGeneration(
+                GenerateLivingTestNeighborhood(this.testCell, coreCellLives: false, liveNeighborCount: 4));
+
+            nextGen.Should().NotContain(this.testCell);
+        }
+
         [DynamicData(nameof(StrategiesWithStandardRules))]
         [DataTestMethod, TestCategory(TestCategories.Unit)]
         public void AdvanceGenerationBlockStillLifeShouldRemainUnchanged(IGenerationStrategy strategyUnderTest)
@@ -127,6 +204,30 @@ namespace GameOfLife.Test.Unit
                 new Cell(3, 3)};
 
             AssertOsscillatorRepeatsInTwoGenerations(beacon, strategyUnderTest);
+        }
+
+        private static HashSet<Cell> GenerateLivingTestNeighborhood(Cell coreCell, bool coreCellLives, int liveNeighborCount)
+        {
+            if (liveNeighborCount < 0 || liveNeighborCount > 8 /* max neighbors */)
+            {
+                throw new InternalTestFailureException($"{nameof(liveNeighborCount)} is out of range");
+            }
+
+            var liveNeighborhood = new HashSet<Cell>();
+            if (coreCellLives)
+            {
+                liveNeighborhood.Add(coreCell);
+            }
+
+            foreach (var neighbor in coreCell.FindValidNeighbors())
+            {
+                if (liveNeighborCount-- > 0)
+                {
+                    liveNeighborhood.Add(neighbor);
+                }
+            }
+
+            return liveNeighborhood;
         }
 
         private static void AssertOsscillatorRepeatsInTwoGenerations(HashSet<Cell> initialState, IGenerationStrategy strategyUnderTest)
