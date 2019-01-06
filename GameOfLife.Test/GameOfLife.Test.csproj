@@ -76,13 +76,13 @@
     <Compile Include="Unit\StoreCountsForAllCellsWithAliveNeighborsGenerationStrategyUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameOfLife\GameOfLife.csproj">
-      <Project>{89a49e82-8329-4d53-95ea-21c9887132aa}</Project>
-      <Name>GameOfLife</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\GameOfLife.Core\GameOfLife.Core.csproj">
+      <Project>{679c8cd2-5989-4196-ab9b-f60c5b28f5ee}</Project>
+      <Name>GameOfLife.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

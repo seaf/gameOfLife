@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using GameOfLife.Engine;
-using GameOfLife.Engine.Strategy;
+using GameOfLife.Core.Engine;
+using GameOfLife.Core.Engine.Strategy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameOfLife.Test.Unit

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameOfLife.Engine.Strategy
+namespace GameOfLife.Core.Engine.Strategy
 {
     /// <summary>
     /// Computes the next generation of alive cells in the Game of Life by creating a mapping of cells that have

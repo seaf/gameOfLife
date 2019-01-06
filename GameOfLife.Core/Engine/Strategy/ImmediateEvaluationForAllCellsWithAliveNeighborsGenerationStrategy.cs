@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameOfLife.Engine.Strategy
+namespace GameOfLife.Core.Engine.Strategy
 {
     /// <summary>
     /// Computes the next generation of living cells in The Game of Life.

@@ -1,4 +1,4 @@
-﻿namespace GameOfLife.Engine
+﻿namespace GameOfLife.Core.Engine
 {
     /// <summary>
     /// Abstract representation of the rules of the game for determining which cell's

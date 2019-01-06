@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace GameOfLife.Engine
+namespace GameOfLife.Core.Engine
 {
     /// <summary>
     /// Container for birth and survival thresholds in the Game of Life.

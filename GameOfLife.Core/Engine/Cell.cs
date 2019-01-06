@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameOfLife.Engine
+namespace GameOfLife.Core.Engine
 {
     /// <summary>
     /// Representation of the game's cells, or grid coordinates.
