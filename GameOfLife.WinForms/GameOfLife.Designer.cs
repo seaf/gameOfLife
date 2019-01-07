@@ -40,34 +40,38 @@
             // gamePictureBox
             // 
             this.gamePictureBox.BackColor = System.Drawing.Color.Black;
-            this.gamePictureBox.Location = new System.Drawing.Point(12, 6);
+            this.gamePictureBox.Location = new System.Drawing.Point(13, 14);
+            this.gamePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gamePictureBox.Name = "gamePictureBox";
-            this.gamePictureBox.Size = new System.Drawing.Size(776, 553);
+            this.gamePictureBox.Size = new System.Drawing.Size(1340, 1102);
             this.gamePictureBox.TabIndex = 0;
             this.gamePictureBox.TabStop = false;
             // 
             // inputTextBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(12, 590);
+            this.inputTextBox.Location = new System.Drawing.Point(13, 1182);
+            this.inputTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.inputTextBox.Multiline = true;
             this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(776, 68);
+            this.inputTextBox.Size = new System.Drawing.Size(1340, 102);
             this.inputTextBox.TabIndex = 1;
             // 
             // inputBoxLabel
             // 
             this.inputBoxLabel.AutoSize = true;
-            this.inputBoxLabel.Location = new System.Drawing.Point(12, 566);
+            this.inputBoxLabel.Location = new System.Drawing.Point(13, 1145);
+            this.inputBoxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.inputBoxLabel.Name = "inputBoxLabel";
-            this.inputBoxLabel.Size = new System.Drawing.Size(118, 13);
+            this.inputBoxLabel.Size = new System.Drawing.Size(91, 20);
             this.inputBoxLabel.TabIndex = 2;
-            this.inputBoxLabel.Text = "Enter Initial Living Cells:";
+            this.inputBoxLabel.Text = "Living Cells:";
             // 
             // runGameButton
             // 
-            this.runGameButton.Location = new System.Drawing.Point(12, 677);
+            this.runGameButton.Location = new System.Drawing.Point(13, 1316);
+            this.runGameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.runGameButton.Name = "runGameButton";
-            this.runGameButton.Size = new System.Drawing.Size(75, 23);
+            this.runGameButton.Size = new System.Drawing.Size(112, 35);
             this.runGameButton.TabIndex = 3;
             this.runGameButton.Text = "Run Game";
             this.runGameButton.UseVisualStyleBackColor = true;
@@ -75,9 +79,10 @@
             // 
             // stopGameButton
             // 
-            this.stopGameButton.Location = new System.Drawing.Point(93, 677);
+            this.stopGameButton.Location = new System.Drawing.Point(135, 1316);
+            this.stopGameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.stopGameButton.Name = "stopGameButton";
-            this.stopGameButton.Size = new System.Drawing.Size(75, 23);
+            this.stopGameButton.Size = new System.Drawing.Size(112, 35);
             this.stopGameButton.TabIndex = 4;
             this.stopGameButton.Text = "Stop Game";
             this.stopGameButton.UseVisualStyleBackColor = true;
@@ -86,23 +91,25 @@
             // generationCountLabel
             // 
             this.generationCountLabel.AutoSize = true;
-            this.generationCountLabel.Location = new System.Drawing.Point(174, 682);
+            this.generationCountLabel.Location = new System.Drawing.Point(256, 1323);
+            this.generationCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.generationCountLabel.Name = "generationCountLabel";
-            this.generationCountLabel.Size = new System.Drawing.Size(62, 13);
+            this.generationCountLabel.Size = new System.Drawing.Size(93, 20);
             this.generationCountLabel.TabIndex = 5;
             this.generationCountLabel.Text = "Generation:";
             // 
             // GameOfLife
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 715);
+            this.ClientSize = new System.Drawing.Size(1367, 1379);
             this.Controls.Add(this.generationCountLabel);
             this.Controls.Add(this.stopGameButton);
             this.Controls.Add(this.runGameButton);
             this.Controls.Add(this.inputBoxLabel);
             this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.gamePictureBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameOfLife";
             this.Text = "Game Of Life";
             this.Load += new System.EventHandler(this.Form1_Load);
