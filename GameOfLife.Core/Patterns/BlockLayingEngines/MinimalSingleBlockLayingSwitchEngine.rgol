@@ -1,0 +1,13 @@
+﻿# 10-cell (proven minimal) single block laying switch engine
+# https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+(211,217)
+(212,215)
+(212,217)
+(212,218)
+(213,215)
+(213,217)
+(214,215)
+(215,213)
+(216,211)
+(216,213)

@@ -47,13 +47,21 @@
     <Compile Include="Engine\Strategy\IGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
-    <Compile Include="InitialGameStates.cs" />
     <Compile Include="Input\FileGameInputSource.cs" />
     <Compile Include="Input\ICellParser.cs" />
     <Compile Include="Input\IGameInputSource.cs" />
     <Compile Include="Input\InputConstants.cs" />
     <Compile Include="Input\TupleFormatCellParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Patterns\BlockLayingEngines\FiveByFiveSingleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\BlockLayingEngines\MinimalSingleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\BlockLayingEngines\OneCellHighDoubleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\Guns\GosperGliderGun.rgol" />
+    <None Include="Patterns\Methuselahs\Acorn.rgol" />
+    <None Include="Patterns\Oscillators\Pentadecathon.rgol" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
