@@ -34,9 +34,6 @@ namespace GameOfLife.WinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.UpdateGameState(
-                null,
-                InitialGameStates.GosperGliderGun);
         }
 
         private async void runGameButton_Click(object sender, EventArgs e)
