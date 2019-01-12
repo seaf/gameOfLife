@@ -14,7 +14,7 @@ namespace GameOfLife
         // TODO: add command line parser and option to select input source
         private static readonly IGameInputSource GameInputSource =
             new FileGameInputSource(
-                "REPLACEME",
+                @"REPLACEME",
                 new TupleFormatCellParser());
 
         static async Task Main(string[] args)

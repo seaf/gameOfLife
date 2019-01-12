@@ -36,15 +36,20 @@ namespace GameOfLife.Core.Input
                 string line = await streamReader.ReadLineAsync();
                 while (line != null)
                 {
-                    if (!this.cellParser.TryParseCellFromString(line, out Cell cell))
+                    if (!string.IsNullOrWhiteSpace(line) &&
+                        !line.StartsWith(InputConstants.Comment))
                     {
-                        throw new InvalidDataException(
-                            $"{this.filePath} contains malformed data. " +
-                            "each line must be of the form (x, y) where x and y " +
-                            "are 64-bit unsigned integers"); 
+                        if (!this.cellParser.TryParseCellFromString(line, out Cell cell))
+                        {
+                            throw new InvalidDataException(
+                                $"{this.filePath} contains malformed data. " +
+                                "each line must be of the form (x, y) where x and y " +
+                                "are 64-bit unsigned integers");
+                        }
+
+                        initialGameState.Add(cell);
                     }
 
-                    initialGameState.Add(cell);
                     line = await streamReader.ReadLineAsync();
                 }
             }
