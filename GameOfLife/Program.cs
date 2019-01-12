@@ -1,54 +1,88 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
+using CommandLine;
 using GameOfLife.Core.Engine.Strategy;
 using GameOfLife.Core.Input;
 
-namespace GameOfLife
+namespace GameOfLife.Console
 {
+    // todo: docs
     public class Program
     {
         private static readonly IGenerationStrategy GenerationStrategy =
             new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
 
-        // TODO: add command line parser and option to select input source
-        private static readonly IGameInputSource GameInputSource =
-            new FileGameInputSource(
-                @"REPLACEME",
-                new TupleFormatCellParser());
+        private static readonly ICellParser CellParser = new TupleFormatCellParser();
 
-        static async Task Main(string[] args)
+        internal static async Task Main(string[] args)
         {
-            var liveCells = await GameInputSource.GetInitialGameState();
-            if (liveCells.Count == 0)
-            {
-                Console.WriteLine("No input found! Exiting simulation.");
-                Thread.Sleep(2000);
-                Environment.Exit(0);
-            }
+            IGameInputSource gameInputSource = null;
+            Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(
+                    (options) =>
+                    {
+                        if (options.InputFile != null)
+                        {
+                            gameInputSource = new FileGameInputSource(options.InputFile, CellParser);
+                        }
+                        else
+                        {
+                            gameInputSource = new ConsoleGameInputSource(CellParser);
+                        }
+                    })
+                .WithNotParsed(
+                    (errors) =>
+                    {
+                        foreach (var error in errors)
+                        {
+                            System.Console.WriteLine(error);
+                        }
+                    });
 
-            var generation = 1;
-            while (true)
+            try
             {
-                Console.WriteLine($"Generation: {generation++}");
-
-                foreach (var cell in liveCells)
+                var liveCells = await gameInputSource.GetInitialGameState();
+                if (liveCells.Count == 0)
                 {
-                    Console.WriteLine(cell);
+                    System.Console.WriteLine("No input found! Exiting simulation.");
+                    PauseBeforeExit();
                 }
 
-                Console.WriteLine(
-                    "Hit ENTER to simulate the next generation (or " +
-                    $"\"{InputConstants.InputEnd}\" to exit).");
-
-                var input = Console.ReadLine().Trim().ToLowerInvariant();
-                if (input == InputConstants.InputEnd)
+                var generation = 1;
+                while (true)
                 {
-                    break;
-                }
+                    System.Console.WriteLine($"Generation: {generation++}");
 
-                liveCells = GenerationStrategy.AdvanceGeneration(liveCells);
+                    foreach (var cell in liveCells)
+                    {
+                        System.Console.WriteLine(cell);
+                    }
+
+                    System.Console.WriteLine(
+                        "Hit ENTER to simulate the next generation (or " +
+                        $"\"{InputConstants.InputEnd}\" to exit).");
+
+                    var input = System.Console.ReadLine().Trim().ToLowerInvariant();
+                    if (input == InputConstants.InputEnd)
+                    {
+                        break;
+                    }
+
+                    liveCells = GenerationStrategy.AdvanceGeneration(liveCells);
+                }
             }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex);
+                PauseBeforeExit();
+            }
+        }
+
+        private static void PauseBeforeExit()
+        {
+            System.Console.WriteLine("ENTER to exit.");
+            System.Console.ReadLine();
+            Environment.Exit(0);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using GameOfLife.Core.Engine;
 using GameOfLife.Core.Input;
 
-namespace GameOfLife
+namespace GameOfLife.Console
 {
     // todo: docs, tests
     internal class ConsoleGameInputSource : IGameInputSource
@@ -21,20 +21,20 @@ namespace GameOfLife
             var line = string.Empty;
             var initialGameState = new HashSet<Cell>();
 
-            Console.WriteLine("---- Conway's Game of Life ----" + Environment.NewLine);
-            Console.WriteLine(
+            System.Console.WriteLine("---- Conway's Game of Life ----" + Environment.NewLine);
+            System.Console.WriteLine(
                 "Enter the coordinates (as unsigned 64-bit integers) " +
                 "of initial living cells: (x, y)");
 
-            Console.WriteLine($"Enter \"{InputConstants.InputEnd}\" to exit.");
+            System.Console.WriteLine($"Enter \"{InputConstants.InputEnd}\" to exit.");
 
             while (true)
             {
-                Console.Write(
+                System.Console.Write(
                     Environment.NewLine +
                     $"Enter Live Cell (or \"{InputConstants.InputEnd}\"): ");
 
-                line = Console.ReadLine();
+                line = System.Console.ReadLine();
                 if (line == InputConstants.InputEnd)
                 {
                     break;
@@ -46,7 +46,7 @@ namespace GameOfLife
                 }
                 else
                 {
-                    Console.WriteLine(
+                    System.Console.WriteLine(
                         Environment.NewLine +
                         "A cell must be of the form (x, y) " +
                         "where x and y are 64-bit unsigned integers.");
