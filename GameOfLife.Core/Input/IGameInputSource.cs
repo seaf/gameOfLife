@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using GameOfLife.Core.Engine;
 
 namespace GameOfLife.Core.Input
@@ -6,6 +7,6 @@ namespace GameOfLife.Core.Input
     // todo: docs
     public interface IGameInputSource
     {
-        HashSet<Cell> GetInitialGameState();
+        Task<HashSet<Cell>> GetInitialGameState();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using GameOfLife.Core.Engine.Strategy;
 using GameOfLife.Core.Input;
 
@@ -10,14 +11,15 @@ namespace GameOfLife
         private static readonly IGenerationStrategy GenerationStrategy =
             new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
 
+        // TODO: add command line parser and option to select input source
         private static readonly IGameInputSource GameInputSource =
-            new ConsoleGameInputSource(new TupleFormatCellParser());
+            new FileGameInputSource(
+                "REPLACEME",
+                new TupleFormatCellParser());
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            // TODO: Consider reading from a file for easier editing of large input and providing set complex input
-            var liveCells = GameInputSource.GetInitialGameState();
-
+            var liveCells = await GameInputSource.GetInitialGameState();
             if (liveCells.Count == 0)
             {
                 Console.WriteLine("No input found! Exiting simulation.");

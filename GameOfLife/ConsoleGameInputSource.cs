@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GameOfLife.Core.Engine;
 using GameOfLife.Core.Input;
 
@@ -15,7 +16,7 @@ namespace GameOfLife
             this.cellParser = cellParser ?? throw new ArgumentNullException(nameof(cellParser));
         }
 
-        public HashSet<Cell> GetInitialGameState()
+        public Task<HashSet<Cell>> GetInitialGameState()
         {
             var line = string.Empty;
             var initialGameState = new HashSet<Cell>();
@@ -52,7 +53,7 @@ namespace GameOfLife
                 }
             }
 
-            return initialGameState;
+            return Task.FromResult(initialGameState);
         }
     }
 }

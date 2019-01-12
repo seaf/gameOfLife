@@ -3,6 +3,7 @@ using GameOfLife.Core.Engine;
 
 namespace GameOfLife.Core
 {
+    // TODO: remove this and convert patterns to resource files since they can now be read as input
     /// <summary>
     /// See:
     /// https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
