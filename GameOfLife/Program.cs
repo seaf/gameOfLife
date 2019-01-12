@@ -1,48 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using GameOfLife.Core.Engine;
+using System.Threading;
 using GameOfLife.Core.Engine.Strategy;
+using GameOfLife.Core.Input;
 
 namespace GameOfLife
 {
     public class Program
     {
-        private const string INPUT_DONE = "done";
+        private static readonly IGenerationStrategy GenerationStrategy =
+            new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
 
-        private static readonly IGenerationStrategy generationStrategy = new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
+        private static readonly IGameInputSource GameInputSource =
+            new ConsoleGameInputSource(new TupleFormatCellParser());
 
         static void Main(string[] args)
         {
             // TODO: Consider reading from a file for easier editing of large input and providing set complex input
-            var liveCells = new HashSet<Cell>();
-            while (true)
-            {
-                Console.WriteLine("Enter coordinates (as unsigned 64-bit integers) of a living cell, separated by a comma (e.g. x,y). Enter \"done\" to finish:");
-
-                var line = ReadProcessedLine();
-                if (line == INPUT_DONE)
-                {
-                    break;
-                }
-
-                var coords = line.Split(',');
-                if (coords.Length != 2)
-                {
-                    Console.WriteLine("Coordinates must be of the form \"x,y\".");
-                    continue;
-                }
-
-                if (!ulong.TryParse(coords[0], out ulong x) || !ulong.TryParse(coords[1], out ulong y))
-                {
-                    Console.WriteLine($"Unable to parse coordinates. x: {coords[0]}, y: {coords[1]}.");
-                    continue;
-                }
-
-                liveCells.Add(new Cell(x, y));
-            }
+            var liveCells = GameInputSource.GetInitialGameState();
 
             if (liveCells.Count == 0)
             {
+                Console.WriteLine("No input found! Exiting simulation.");
+                Thread.Sleep(2000);
                 Environment.Exit(0);
             }
 
@@ -50,25 +29,24 @@ namespace GameOfLife
             while (true)
             {
                 Console.WriteLine($"Generation: {generation++}");
+
                 foreach (var cell in liveCells)
                 {
                     Console.WriteLine(cell);
                 }
 
-                Console.WriteLine("Hit ENTER to advance the generation, or \"done\" to quit.");
-                var line = ReadProcessedLine();
-                if (line == INPUT_DONE)
+                Console.WriteLine(
+                    "Hit ENTER to simulate the next generation (or " +
+                    $"\"{InputConstants.InputEnd}\" to exit).");
+
+                var input = Console.ReadLine().Trim().ToLowerInvariant();
+                if (input == InputConstants.InputEnd)
                 {
-                    return;
+                    break;
                 }
 
-                liveCells = generationStrategy.AdvanceGeneration(liveCells);
+                liveCells = GenerationStrategy.AdvanceGeneration(liveCells);
             }
-        }
-
-        private static string ReadProcessedLine()
-        {
-            return Console.ReadLine().Trim().ToLowerInvariant();
         }
     }
 }

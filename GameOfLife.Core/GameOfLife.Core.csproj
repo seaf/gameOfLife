@@ -48,6 +48,10 @@
     <Compile Include="Engine\Strategy\ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="Engine\Strategy\StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy.cs" />
     <Compile Include="InitialGameStates.cs" />
+    <Compile Include="Input\ICellParser.cs" />
+    <Compile Include="Input\IGameInputSource.cs" />
+    <Compile Include="Input\InputConstants.cs" />
+    <Compile Include="Input\TupleFormatCellParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
