@@ -56,9 +56,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Patterns\BlockLayingEngines\FiveByFiveSingleBlockLayingSwitchEngine.rgol" />
-    <None Include="Patterns\BlockLayingEngines\MinimalSingleBlockLayingSwitchEngine.rgol" />
-    <None Include="Patterns\BlockLayingEngines\OneCellHighDoubleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\Puffers\FiveByFiveSingleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\Puffers\MinimalSingleBlockLayingSwitchEngine.rgol" />
+    <None Include="Patterns\Puffers\OneCellHighDoubleBlockLayingSwitchEngine.rgol" />
     <None Include="Patterns\Guns\GosperGliderGun.rgol" />
     <None Include="Patterns\Methuselahs\Acorn.rgol" />
     <None Include="Patterns\Methuselahs\Bunnies.rgol" />
@@ -70,6 +70,8 @@
     <None Include="Patterns\Oscillators\TwinBeesShuttle.rgol" />
     <None Include="Patterns\Puffers\NoahsArk.rgol" />
     <None Include="Patterns\Puffers\Puffer2.rgol" />
+    <None Include="Patterns\Spaceships\Copperhead.rgol" />
+    <None Include="Patterns\Spaceships\Lightweight.rgol" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
