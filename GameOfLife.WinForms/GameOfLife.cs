@@ -27,7 +27,7 @@ namespace GameOfLife.WinForms
         private byte scaleFactor;
         private ushort generationDelayMs;
         private ulong generationsCount;
-        private bool stopGame;
+        private bool gameIsRunning;
         private HashSet<Cell> currentGeneration;
         private Bitmap gameStateBitmap;
 
@@ -58,12 +58,16 @@ namespace GameOfLife.WinForms
 
         private async void runGameButton_Click(object sender, EventArgs e)
         {
-            if (stopGame)
+            if (gameIsRunning)
             {
-                stopGame = false;
+                return;
+            }
+            else
+            {
+                gameIsRunning = true;
             }
 
-            while (!stopGame)
+            while (gameIsRunning)
             {
                 var newGeneration = this.gameStrategy.AdvanceGeneration(this.currentGeneration);
                 this.UpdateGameState(this.currentGeneration, newGeneration);
@@ -131,7 +135,7 @@ namespace GameOfLife.WinForms
 
         private void stopGameButton_Click(object sender, EventArgs e)
         {
-            this.stopGame = true;
+            this.gameIsRunning = false;
         }
 
         private async void loadPatternButton_Click(object sender, EventArgs e)
