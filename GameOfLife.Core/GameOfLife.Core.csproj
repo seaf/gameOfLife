@@ -61,7 +61,15 @@
     <None Include="Patterns\BlockLayingEngines\OneCellHighDoubleBlockLayingSwitchEngine.rgol" />
     <None Include="Patterns\Guns\GosperGliderGun.rgol" />
     <None Include="Patterns\Methuselahs\Acorn.rgol" />
+    <None Include="Patterns\Methuselahs\Bunnies.rgol" />
+    <None Include="Patterns\Methuselahs\Lidka.rgol" />
+    <None Include="Patterns\Oscillators\Beacon.rgol" />
+    <None Include="Patterns\Oscillators\Blinker.rgol" />
+    <None Include="Patterns\Oscillators\FigureEight.rgol" />
     <None Include="Patterns\Oscillators\Pentadecathon.rgol" />
+    <None Include="Patterns\Oscillators\TwinBeesShuttle.rgol" />
+    <None Include="Patterns\Puffers\NoahsArk.rgol" />
+    <None Include="Patterns\Puffers\Puffer2.rgol" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

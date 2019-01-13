@@ -72,7 +72,10 @@ namespace GameOfLife.WinForms
                 var newGeneration = this.gameStrategy.AdvanceGeneration(this.currentGeneration);
                 this.UpdateGameState(this.currentGeneration, newGeneration);
 
-                await Task.Delay(this.generationDelayMs);
+                if (this.generationDelayMs > 0)
+                {
+                    await Task.Delay(this.generationDelayMs);
+                }
             }
         }
 
@@ -135,12 +138,18 @@ namespace GameOfLife.WinForms
 
         private void stopGameButton_Click(object sender, EventArgs e)
         {
+            this.StopGame();
+        }
+
+        private void StopGame()
+        {
             this.gameIsRunning = false;
         }
 
         private async void loadPatternButton_Click(object sender, EventArgs e)
         {
-            ResetGameImage();
+            this.StopGame();
+            this.ResetGameImage();
 
             var patternDirectory = Path.GetFullPath(
                 Path.Combine(
@@ -167,7 +176,7 @@ namespace GameOfLife.WinForms
             if (byte.TryParse(this.cellScaleTextBox.Text, out byte scale))
             {
                 this.scaleFactor = scale;
-                ResetGameImage();
+                this.ResetGameImage();
             }
         }
 

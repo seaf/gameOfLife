@@ -1,0 +1,15 @@
+﻿# Figure-Eight oscillator (period 8)
+# http://www.conwaylife.com/wiki/Figure_eight
+
+(21, 21)
+(21, 22)
+(22, 21)
+(22, 22)
+(24, 22)
+(25, 23)
+(22, 24)
+(23, 25)
+(25, 25)
+(25, 26)
+(26, 25)
+(26, 26)
