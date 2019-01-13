@@ -14,7 +14,7 @@ namespace GameOfLife.WinForms
     public partial class GameOfLife : Form
     {
         private const byte DefaultCellScale = 2;
-        private const ushort DefaultGenerationDelayMs = 50;
+        private const ushort DefaultGenerationDelayMs = 100;
         private const string GenerationsCountTextTemplate = "Generation: ";
         private const string RelativePathFromBinToPatterns = @"..\..\..\GameOfLife.Core\Patterns";
 
@@ -173,7 +173,7 @@ namespace GameOfLife.WinForms
 
         private void generationDelayTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ushort.TryParse(this.generationDelayTextBox.Text, out ushort genDelay))
+            if (ushort.TryParse(this.generationDelayTextBox.Text, out ushort genDelay) && genDelay > 0)
             {
                 this.generationDelayMs = genDelay;
             }
