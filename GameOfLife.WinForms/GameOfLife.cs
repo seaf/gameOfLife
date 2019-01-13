@@ -33,6 +33,9 @@ namespace GameOfLife.WinForms
         private bool gameIsRunning;
         private HashSet<Cell> currentGeneration;
         private Bitmap gameStateBitmap;
+        private Cell boundingBoxOrigin;
+        private ulong rowTranslationAfterScale;
+        private ulong columnTransactionAfterScale;
 
         public GameOfLife()
         {
@@ -112,19 +115,23 @@ namespace GameOfLife.WinForms
                 return;
             }
 
+
             // Apply scaling to help make structures more visible.
             // This has the side effect of shrinking the displayable portion of the game grid.
-            var scaledRow = Convert.ToInt32(cell.RowCoordinate * scaleFactor);
-            var scaledCol = Convert.ToInt32(cell.ColumnCoordinate * scaleFactor);
+            var scaledRow = (cell.RowCoordinate * scaleFactor) - this.rowTranslationAfterScale;
+            var scaledCol = (cell.ColumnCoordinate * scaleFactor) - this.columnTransactionAfterScale;
 
             // From the origin of the cell, draw a scaleFactor-by-scaleFactor pixel square.
             foreach (var rowOffset in Enumerable.Range(0, scaleFactor))
             {
                 foreach (var colOffset in Enumerable.Range(0, scaleFactor))
                 {
-                    if (!this.IsCellOutOfBounds(scaledRow + rowOffset, scaledCol + colOffset))
+                    var offsetScaledRowAsInt = Convert.ToInt32(scaledRow) + rowOffset;
+                    var offsetScaledColAsInt = Convert.ToInt32(scaledCol) + colOffset;
+
+                    if (!this.IsCellOutOfBounds(offsetScaledRowAsInt, offsetScaledColAsInt))
                     {
-                        this.gameStateBitmap.SetPixel(scaledCol + colOffset, scaledRow + rowOffset, color);
+                        this.gameStateBitmap.SetPixel(offsetScaledColAsInt, offsetScaledRowAsInt, color);
                     }
                 }
             }
@@ -172,10 +179,38 @@ namespace GameOfLife.WinForms
 
             var file = openPatternFileDialog.FileName;
             var fileInputSource = new FileGameInputSource(file, this.cellParser);
+            var initialGameState = await fileInputSource.GetInitialGameState();
 
-            this.UpdateGameState(
-                null,
-                await fileInputSource.GetInitialGameState());
+            this.UpdateBoundingBoxOrigin(initialGameState);
+            this.UpdateScaleTranslations();
+            this.UpdateGameState(null, initialGameState);
+        }
+
+        private void UpdateBoundingBoxOrigin(HashSet<Cell> cells)
+        {
+            ulong minRow = ulong.MaxValue;
+            ulong minCol = ulong.MaxValue;
+
+            foreach (var cell in cells)
+            {
+                if (cell.RowCoordinate < minRow)
+                {
+                    minRow = cell.RowCoordinate;
+                }
+
+                if (cell.ColumnCoordinate < minCol)
+                {
+                    minCol = cell.ColumnCoordinate;
+                }
+            }
+
+            this.boundingBoxOrigin = new Cell(minRow, minCol);
+        }
+
+        private void UpdateScaleTranslations()
+        {
+            this.rowTranslationAfterScale = (this.boundingBoxOrigin.RowCoordinate * scaleFactor) - this.boundingBoxOrigin.RowCoordinate;
+            this.columnTransactionAfterScale = (this.boundingBoxOrigin.ColumnCoordinate * scaleFactor) - this.boundingBoxOrigin.ColumnCoordinate;
         }
 
         private void cellScaleTextBox_TextChanged(object sender, EventArgs e)
@@ -183,7 +218,8 @@ namespace GameOfLife.WinForms
             if (byte.TryParse(this.cellScaleTextBox.Text, out byte scale))
             {
                 this.scaleFactor = scale;
-                this.ResetGameImage();
+                this.UpdateScaleTranslations();
+                ResetGameImage();
             }
         }
 
