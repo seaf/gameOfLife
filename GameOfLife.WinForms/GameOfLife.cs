@@ -13,8 +13,9 @@ namespace GameOfLife.WinForms
 {
     public partial class GameOfLife : Form
     {
-        private const string GenerationsCountTextTemplate = "Generations: ";
-        private const int ScaleFactor = 5;
+        private const byte DefaultCellScale = 2;
+        private const ushort DefaultGenerationDelayMs = 50;
+        private const string GenerationsCountTextTemplate = "Generation: ";
         private const string RelativePathFromBinToPatterns = @"..\..\..\GameOfLife.Core\Patterns";
 
         private static readonly Color LiveCellColor = Color.White;
@@ -23,6 +24,8 @@ namespace GameOfLife.WinForms
         private readonly IGenerationStrategy gameStrategy;
         private readonly ICellParser cellParser;
 
+        private byte scaleFactor;
+        private ushort generationDelayMs;
         private ulong generationsCount;
         private bool stopGame;
         private HashSet<Cell> currentGeneration;
@@ -32,19 +35,29 @@ namespace GameOfLife.WinForms
         {
             InitializeComponent();
 
-            this.gameStateBitmap = new Bitmap(this.gamePictureBox.Width, this.gamePictureBox.Height); // TODO: May need to move this to handle loading of multiple files and wiping the image
+            this.scaleFactor = DefaultCellScale;
+            this.cellScaleTextBox.Text = DefaultCellScale.ToString();
+
+            this.generationDelayMs = DefaultGenerationDelayMs;
+            this.generationDelayTextBox.Text = DefaultGenerationDelayMs.ToString();
+
             this.gameStrategy = new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
             this.cellParser = new TupleFormatCellParser();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ResetGameImage();
+        }
+
+        private void ResetGameImage()
+        {
+            this.gameStateBitmap = new Bitmap(this.gamePictureBox.Width, this.gamePictureBox.Height);
+            this.gamePictureBox.Image = this.gameStateBitmap;
         }
 
         private async void runGameButton_Click(object sender, EventArgs e)
         {
-            // TODO: ultimately, read input from text box here
-
             if (stopGame)
             {
                 stopGame = false;
@@ -55,8 +68,7 @@ namespace GameOfLife.WinForms
                 var newGeneration = this.gameStrategy.AdvanceGeneration(this.currentGeneration);
                 this.UpdateGameState(this.currentGeneration, newGeneration);
 
-                // TODO: Make this modifiable
-                await Task.Delay(50);
+                await Task.Delay(this.generationDelayMs);
             }
         }
 
@@ -89,12 +101,12 @@ namespace GameOfLife.WinForms
                 return;
             }
 
-            var scaledRow = Convert.ToInt32(cell.RowCoordinate * ScaleFactor);
-            var scaledCol = Convert.ToInt32(cell.ColumnCoordinate * ScaleFactor);
+            var scaledRow = Convert.ToInt32(cell.RowCoordinate * scaleFactor);
+            var scaledCol = Convert.ToInt32(cell.ColumnCoordinate * scaleFactor);
 
-            foreach (var rowOffset in Enumerable.Range(0, ScaleFactor))
+            foreach (var rowOffset in Enumerable.Range(0, scaleFactor))
             {
-                foreach (var colOffset in Enumerable.Range(0, ScaleFactor))
+                foreach (var colOffset in Enumerable.Range(0, scaleFactor))
                 {
                     if (!this.IsCellOutOfBounds(scaledRow + rowOffset, scaledCol + colOffset))
                     {
@@ -124,7 +136,7 @@ namespace GameOfLife.WinForms
 
         private async void loadPatternButton_Click(object sender, EventArgs e)
         {
-            // TODO: Consider handling the bitmap creation/reset here so multiple files can be loaded in sequence...
+            ResetGameImage();
 
             var patternDirectory = Path.GetFullPath(
                 Path.Combine(
@@ -144,6 +156,23 @@ namespace GameOfLife.WinForms
             this.UpdateGameState(
                 null,
                 await fileInputSource.GetInitialGameState());
+        }
+
+        private void cellScaleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (byte.TryParse(this.cellScaleTextBox.Text, out byte scale))
+            {
+                this.scaleFactor = scale;
+                ResetGameImage();
+            }
+        }
+
+        private void generationDelayTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ushort.TryParse(this.generationDelayTextBox.Text, out ushort genDelay))
+            {
+                this.generationDelayMs = genDelay;
+            }
         }
     }
 }

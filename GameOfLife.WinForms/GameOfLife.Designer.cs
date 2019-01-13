@@ -34,6 +34,10 @@
             this.generationCountLabel = new System.Windows.Forms.Label();
             this.loadPatternButton = new System.Windows.Forms.Button();
             this.openPatternFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.cellScaleTextBox = new System.Windows.Forms.TextBox();
+            this.cellScaleLabel = new System.Windows.Forms.Label();
+            this.generationDelayLabel = new System.Windows.Forms.Label();
+            this.generationDelayTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gamePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +94,55 @@
             // 
             this.openPatternFileDialog.Title = "Select Pattern File";
             // 
+            // cellScaleTextBox
+            // 
+            this.cellScaleTextBox.Location = new System.Drawing.Point(1042, 1082);
+            this.cellScaleTextBox.MaxLength = 1;
+            this.cellScaleTextBox.Name = "cellScaleTextBox";
+            this.cellScaleTextBox.Size = new System.Drawing.Size(42, 20);
+            this.cellScaleTextBox.TabIndex = 7;
+            this.cellScaleTextBox.Text = "2";
+            this.cellScaleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.cellScaleTextBox.TextChanged += new System.EventHandler(this.cellScaleTextBox_TextChanged);
+            // 
+            // cellScaleLabel
+            // 
+            this.cellScaleLabel.AutoSize = true;
+            this.cellScaleLabel.Location = new System.Drawing.Point(979, 1085);
+            this.cellScaleLabel.Name = "cellScaleLabel";
+            this.cellScaleLabel.Size = new System.Drawing.Size(57, 13);
+            this.cellScaleLabel.TabIndex = 8;
+            this.cellScaleLabel.Text = "Cell Scale:";
+            // 
+            // generationDelayLabel
+            // 
+            this.generationDelayLabel.AutoSize = true;
+            this.generationDelayLabel.Location = new System.Drawing.Point(797, 1085);
+            this.generationDelayLabel.Name = "generationDelayLabel";
+            this.generationDelayLabel.Size = new System.Drawing.Size(114, 13);
+            this.generationDelayLabel.TabIndex = 9;
+            this.generationDelayLabel.Text = "Generation Delay (ms):";
+            // 
+            // generationDelayTextBox
+            // 
+            this.generationDelayTextBox.Location = new System.Drawing.Point(917, 1082);
+            this.generationDelayTextBox.MaxLength = 4;
+            this.generationDelayTextBox.Name = "generationDelayTextBox";
+            this.generationDelayTextBox.Size = new System.Drawing.Size(42, 20);
+            this.generationDelayTextBox.TabIndex = 10;
+            this.generationDelayTextBox.Text = "2";
+            this.generationDelayTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.generationDelayTextBox.TextChanged += new System.EventHandler(this.generationDelayTextBox_TextChanged);
+            // 
             // GameOfLife
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 1111);
+            this.Controls.Add(this.generationDelayTextBox);
+            this.Controls.Add(this.generationDelayLabel);
+            this.Controls.Add(this.cellScaleLabel);
+            this.Controls.Add(this.cellScaleTextBox);
             this.Controls.Add(this.loadPatternButton);
             this.Controls.Add(this.generationCountLabel);
             this.Controls.Add(this.stopGameButton);
@@ -118,6 +166,10 @@
         private System.Windows.Forms.Label generationCountLabel;
         private System.Windows.Forms.Button loadPatternButton;
         private System.Windows.Forms.OpenFileDialog openPatternFileDialog;
+        private System.Windows.Forms.TextBox cellScaleTextBox;
+        private System.Windows.Forms.Label cellScaleLabel;
+        private System.Windows.Forms.Label generationDelayLabel;
+        private System.Windows.Forms.TextBox generationDelayTextBox;
     }
 }
 
