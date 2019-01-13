@@ -43,7 +43,7 @@
             // 
             // gamePictureBox
             // 
-            this.gamePictureBox.BackColor = System.Drawing.Color.Black;
+            this.gamePictureBox.BackColor = System.Drawing.Color.MidnightBlue;
             this.gamePictureBox.Location = new System.Drawing.Point(2, 12);
             this.gamePictureBox.Name = "gamePictureBox";
             this.gamePictureBox.Size = new System.Drawing.Size(1379, 1034);
@@ -138,6 +138,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1384, 1111);
             this.Controls.Add(this.generationDelayTextBox);
             this.Controls.Add(this.generationDelayLabel);

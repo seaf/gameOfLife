@@ -18,8 +18,8 @@ namespace GameOfLife.WinForms
         private const string GenerationsCountTextTemplate = "Generation: ";
         private const string RelativePathFromBinToPatterns = @"..\..\..\GameOfLife.Core\Patterns";
 
-        private static readonly Color LiveCellColor = Color.White;
-        private static readonly Color DeadCellColor = Color.Black;
+        private static readonly Color LiveCellColor = Color.GhostWhite;
+        private static readonly Color DeadCellColor = Color.MidnightBlue;
 
         private readonly IGenerationStrategy gameStrategy;
         private readonly ICellParser cellParser;
