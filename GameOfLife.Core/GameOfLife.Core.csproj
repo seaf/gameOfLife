@@ -54,7 +54,18 @@
     <Compile Include="Input\TupleFormatCellParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Patterns\Life106\3enginecordershipgun_106.lif.txt" />
+    <Content Include="Patterns\Life106\dragon_106.lif.txt" />
+    <Content Include="Patterns\Life106\gunstar_106.lif.txt" />
+    <Content Include="Patterns\Life106\halfmax_106.lif.txt" />
+    <Content Include="Patterns\Life106\max_106.lif.txt" />
+    <Content Include="Patterns\Life106\movingsawtooth_106.lif.txt" />
+    <Content Include="Patterns\Life106\p94s_106.lif.txt" />
+    <Content Include="Patterns\Life106\parabolicsawtooth_106.lif.txt" />
+    <Content Include="Patterns\Life106\sawtooth1_106.lif.txt" />
+    <Content Include="Patterns\Life106\spacefiller1_106.lif.txt" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Patterns\Puffers\FiveByFiveSingleBlockLayingSwitchEngine.rgol" />
     <None Include="Patterns\Puffers\MinimalSingleBlockLayingSwitchEngine.rgol" />
