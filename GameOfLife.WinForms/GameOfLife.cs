@@ -45,7 +45,7 @@ namespace GameOfLife.WinForms
             this.generationDelayTextBox.Text = DefaultGenerationDelayMs.ToString();
 
             this.gameStrategy = new ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy();
-            this.cellParser = new TupleFormatCellParser();
+            this.cellParser = new Life106TranslatorCellParser(this.gamePictureBox.Height, this.gamePictureBox.Width);
         }
 
         private void Form1_Load(object sender, EventArgs e)

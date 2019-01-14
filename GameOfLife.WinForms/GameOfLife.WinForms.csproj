@@ -52,6 +52,7 @@
     <Compile Include="GameOfLife.Designer.cs">
       <DependentUpon>GameOfLife.cs</DependentUpon>
     </Compile>
+    <Compile Include="Life106TranslatorCellParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameOfLife.resx">
