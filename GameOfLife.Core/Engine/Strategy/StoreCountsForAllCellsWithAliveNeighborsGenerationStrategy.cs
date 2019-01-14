@@ -4,23 +4,26 @@ using System.Collections.Generic;
 namespace GameOfLife.Core.Engine.Strategy
 {
     /// <summary>
-    /// Computes the next generation of alive cells in the Game of Life by creating a mapping of cells that have
-    /// a non-zero number of adjacent alive cells (i.e. in their neighborhood) to the number of alive adjacent cells they have.
+    /// Computes the next generation of alive cells in the Game of Life.
+    /// </summary>
     /// 
-    /// Once this mapping is complete, walk the entries collecting the cells that are born or survive based on the game's rules.
+    /// <remarks>
+    /// Creates a mapping of cells that have a non-zero number of adjacent alive cells to the number 
+    /// of alive adjacent cells they have. Once counts are complete, walk the entries in the collection
+    /// and determine the future state of each.
     /// 
-    /// This approach uses a linear [O(n), where n is the number of live cells] amount of additional memory.
-    /// This may be problematic for game states with a large number of live cells.
+    /// This approach uses a linear [O(n), where n is the number of living cells in the current generation]
+    /// amount of additional memory. This may be problematic for game states with a large number of living cells.
     /// 
     /// Computation is also linear in n. For each live cell, we may add up to nine neighboring cells with counts to the mapping.
     /// In the worst case, this mapping will contain 9n entries which is still O(n) to walk.
-    /// </summary>
+    /// </remarks>
     internal class StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy : IGenerationStrategy
     {
         private readonly IGameRules gameRules;
 
         /// <summary>
-        /// Construct the strategy with <see cref="GameRules"/>.
+        /// Construct the strategy with <see cref="GameRules.StandardRulesInstance"/>.
         /// </summary>
         public StoreCountsForAllCellsWithAliveNeighborsGenerationStrategy()
             : this(GameRules.StandardRulesInstance)

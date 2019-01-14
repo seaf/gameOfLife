@@ -6,17 +6,22 @@ namespace GameOfLife.Core.Engine.Strategy
 {
     /// <summary>
     /// Computes the next generation of living cells in The Game of Life.
-    /// 
-    /// This approach stores the next generation of cells to output, but otherwise minimizes additional memory usage.
-    /// Instead, it may repeat work by analyzing the next state of cells that neighbor currently living cells and don't transition to,
-    /// or remain in, a living state in the next generation.
     /// </summary>
+    /// 
+    /// <remarks>
+    /// This approach stores the next generation of cells to output, but otherwise minimizes additional memory usage.
+    /// It may repeat work by analyzing the next state of cells that neighbor currently living cells and don't transition to,
+    /// or remain in, a living state in the next generation.
+    /// 
+    /// Even with overlapping work, each living cell has constant (8) number of neighbors, each of which has the same constant
+    /// number of neighbors. Overall processing is O(n), where n is number of currently living cells.
+    /// </remarks>
     public class ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy : IGenerationStrategy
     {
         private readonly IGameRules gameRules;
 
         /// <summary>
-        /// Construct the strategy with <see cref="GameRules"/>.
+        /// Construct the strategy with <see cref="GameRules.StandardRulesInstance"/>.
         /// </summary>
         public ImmediateEvaluationForAllCellsWithAliveNeighborsGenerationStrategy()
             : this(GameRules.StandardRulesInstance)

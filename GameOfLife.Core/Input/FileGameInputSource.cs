@@ -6,12 +6,22 @@ using GameOfLife.Core.Engine;
 
 namespace GameOfLife.Core.Input
 {
-    // todo: tests and docs
+    // todo: tests
+    /// <summary>
+    /// A source of input for the Game of Life that reads the set of intial living
+    /// cells from a file of the appropriate format.
+    /// </summary>
     public class FileGameInputSource : IGameInputSource
     {
         private readonly string filePath;
         private readonly ICellParser cellParser;
 
+        /// <summary>
+        /// Create a <see cref="FileGameInputSource"/> for the specified file
+        /// and parsing method.
+        /// </summary>
+        /// <param name="filePath">The path to an input file.</param>
+        /// <param name="cellParser">The parser to use.</param>
         public FileGameInputSource(string filePath, ICellParser cellParser)
         {
             if (string.IsNullOrWhiteSpace(filePath))
@@ -23,6 +33,10 @@ namespace GameOfLife.Core.Input
             this.cellParser = cellParser ?? throw new ArgumentNullException(nameof(cellParser));
         }
 
+        /// <summary>
+        /// Retrieve initial game input from the specified file.
+        /// </summary>
+        /// <returns>The set of living cells at the start of the game.</returns>
         public async Task<HashSet<Cell>> GetInitialGameState()
         {
             if (!File.Exists(this.filePath))

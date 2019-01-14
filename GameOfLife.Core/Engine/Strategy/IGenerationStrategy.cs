@@ -3,7 +3,7 @@
 namespace GameOfLife.Core.Engine.Strategy
 {
     /// <summary>
-    /// Abstraction of the logic for moving the game forward by computing the game's next state.
+    /// Provides methods for interacting with the core logic for the Game of Life.
     /// </summary>
     public interface IGenerationStrategy
     {

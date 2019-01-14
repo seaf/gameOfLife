@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameOfLife.Core.Engine;
 using GameOfLife.Core.Engine.Strategy;
-using System.IO;
 using GameOfLife.Core.Input;
 
 namespace GameOfLife.WinForms
 {
+    /// <summary>
+    /// Custom logic to drive the Game of Life Windows Forms UI.
+    /// </summary>
     public partial class GameOfLife : Form
     {
         private const byte DefaultCellScale = 2;
@@ -108,9 +111,12 @@ namespace GameOfLife.WinForms
                 return;
             }
 
+            // Apply scaling to help make structures more visible.
+            // This has the side effect of shrinking the displayable portion of the game grid.
             var scaledRow = Convert.ToInt32(cell.RowCoordinate * scaleFactor);
             var scaledCol = Convert.ToInt32(cell.ColumnCoordinate * scaleFactor);
 
+            // From the origin of the cell, draw a scaleFactor-by-scaleFactor pixel square.
             foreach (var rowOffset in Enumerable.Range(0, scaleFactor))
             {
                 foreach (var colOffset in Enumerable.Range(0, scaleFactor))
@@ -151,6 +157,7 @@ namespace GameOfLife.WinForms
             this.StopGame();
             this.ResetGameImage();
 
+            // Set file dialog's initial directory to the location of the provided patterns.
             var patternDirectory = Path.GetFullPath(
                 Path.Combine(
                     Directory.GetCurrentDirectory(),
@@ -163,7 +170,6 @@ namespace GameOfLife.WinForms
             }
 
             var file = openPatternFileDialog.FileName;
-
             var fileInputSource = new FileGameInputSource(file, this.cellParser);
 
             this.UpdateGameState(

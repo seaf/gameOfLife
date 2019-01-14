@@ -6,7 +6,12 @@ using GameOfLife.Core.Input;
 
 namespace GameOfLife.Console
 {
-    // todo: docs
+    /// <summary>
+    /// Entry-point for the command-line version of the Game of Life.
+    /// 
+    /// Executes the game loop based on selection input type and displays
+    /// output to the console.
+    /// </summary>
     public class Program
     {
         private static readonly IGenerationStrategy GenerationStrategy =
@@ -30,14 +35,7 @@ namespace GameOfLife.Console
                             gameInputSource = new ConsoleGameInputSource(CellParser);
                         }
                     })
-                .WithNotParsed(
-                    (errors) =>
-                    {
-                        foreach (var error in errors)
-                        {
-                            System.Console.WriteLine(error);
-                        }
-                    });
+                .WithNotParsed(errors => Environment.Exit(0));
 
             try
             {

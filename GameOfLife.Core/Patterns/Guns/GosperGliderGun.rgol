@@ -1,4 +1,4 @@
-﻿# Gosper glider gun, creates spaceships from a stationary structure
+﻿# Gosper glider gun (creates spaceships from a stationary structure)
 # https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 (0, 24)

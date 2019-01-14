@@ -5,6 +5,9 @@ namespace GameOfLife.Core.Engine
 {
     /// <summary>
     /// Container for birth and survival thresholds in the Game of Life.
+    /// 
+    /// Allows for rule variations and provides standard rules with explicit
+    /// creation.
     /// </summary>
     internal class GameRules : IGameRules
     {
@@ -19,6 +22,11 @@ namespace GameOfLife.Core.Engine
         {
         }
 
+        /// <summary>
+        /// Create a <see cref="GameRules"/> instance with the given thresholds.
+        /// </summary>
+        /// <param name="birthThresholds">Adjacent living cell counts that transition a dead cell to living.</param>
+        /// <param name="survivalThresholds">Adjacent living cell counts that keep a living cell alive.</param>
         public GameRules(int[] birthThresholds, int[] survivalThresholds)
         {
             this.birthThresholds = birthThresholds ?? throw new ArgumentNullException(nameof(birthThresholds));
@@ -26,7 +34,7 @@ namespace GameOfLife.Core.Engine
         }
 
         /// <summary>
-        /// Gets the single default rules instance of this type.
+        /// Gets the standard <see cref="GameRules"/> rules instance.
         /// </summary>
         public static GameRules StandardRulesInstance => LazyStandardRulesInstance.Value;
 

@@ -6,7 +6,12 @@ using GameOfLife.Core.Input;
 
 namespace GameOfLife.Console
 {
-    // todo: docs, tests
+    // todo: tests
+
+    /// <summary>
+    /// An <see cref="IGameInputSource"/> that reads input from the console and parses it using the
+    /// provider <see cref="ICellParser"/>.
+    /// </summary>
     internal class ConsoleGameInputSource : IGameInputSource
     {
         private readonly ICellParser cellParser;
@@ -16,6 +21,10 @@ namespace GameOfLife.Console
             this.cellParser = cellParser ?? throw new ArgumentNullException(nameof(cellParser));
         }
 
+        /// <summary>
+        /// Retrieve input for the game using a console interface.
+        /// </summary>
+        /// <returns>The set of living cells at the start of the game.</returns>
         public Task<HashSet<Cell>> GetInitialGameState()
         {
             var line = string.Empty;
