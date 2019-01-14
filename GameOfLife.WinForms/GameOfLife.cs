@@ -61,7 +61,8 @@ namespace GameOfLife.WinForms
 
         private async void runGameButton_Click(object sender, EventArgs e)
         {
-            if (gameIsRunning)
+            // No-op if game already running or nothing is yet loaded.
+            if (gameIsRunning || this.currentGeneration == null)
             {
                 return;
             }
