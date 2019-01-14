@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-An implementation of Conway's Game of Life in 64-bit integer space done as a personal project. Console and Windows Forms interfaces are provided, along with standard Game of Life rules (b2/s23), with flexbility for variations and additions.
+An implementation of Conway's Game of Life in 64-bit integer space done as a personal project. Console and Windows Forms interfaces are provided, along with standard Game of Life rules (b3/s23), with flexbility for variations and additions.
 
 ## Project Structure ##
 
