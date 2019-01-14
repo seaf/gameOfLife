@@ -2,7 +2,6 @@
 
 namespace GameOfLife.Core.Input
 {
-    // todo: tests
     /// <summary>
     /// An <see cref="ICellParser"/> to create <see cref="Cell"/>s from strings in "tuple" or similar formats.
     /// </summary>

@@ -6,8 +6,6 @@ using GameOfLife.Core.Input;
 
 namespace GameOfLife.Console
 {
-    // todo: tests
-
     /// <summary>
     /// An <see cref="IGameInputSource"/> that reads input from the console and parses it using the
     /// provider <see cref="ICellParser"/>.

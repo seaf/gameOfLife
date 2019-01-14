@@ -36,8 +36,8 @@ The console application supports input from the command-line if no arguments are
 
 Expected File Format (if using file input):
 
-*Empty lines, or lines beginning with \# are ignored. \# signifies a comment line.
-*Lines of the form `(x, y)` represent a living cell at the start of the game with unsigned, 64-bit integer coordinates x (row), y (column). These should be entered one per line.
+* Empty lines, or lines beginning with \# are ignored. \# signifies a comment line.
+* Lines of the form `(x, y)` represent a living cell at the start of the game with unsigned, 64-bit integer coordinates x (row), y (column). These should be entered one per line.
 
 Example input files are located in GameOfLife.Core\Patterns with .rgol extension.
 

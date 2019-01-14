@@ -6,7 +6,6 @@ using GameOfLife.Core.Engine;
 
 namespace GameOfLife.Core.Input
 {
-    // todo: tests
     /// <summary>
     /// A source of input for the Game of Life that reads the set of intial living
     /// cells from a file of the appropriate format.
